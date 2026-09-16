@@ -1,0 +1,716 @@
+/* ==========================================================================
+   AdBuzz - Mobile-First Refined Design System & Stylesheet
+   Electric Indigo/Cyan Dark Premium Aesthetic
+   ========================================================================== */
+
+:root {
+  /* Color Palette */
+  --bg-primary: #070912;
+  --bg-secondary: #0D1020;
+  --bg-card: #101426;
+  --bg-card-hover: #131830;
+  --bg-badge: rgba(99, 102, 241, 0.08);
+
+  --primary-brand: #6366F1;
+  --primary-brand-dark: #4F46E5;
+  --secondary-accent: #22D3EE;
+  --accent-cyan: #38BDF8;
+  --accent-glow: rgba(99, 102, 241, 0.35);
+  --cyan-glow: rgba(34, 211, 238, 0.25);
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #9CA3AF;
+  --text-muted: #6B7280;
+  --text-badge: #C7D2FE;
+
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-accent: rgba(99, 102, 241, 0.22);
+  --border-focus: #38BDF8;
+
+  /* Typography */
+  --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 16px;
+  --radius-pill: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --------------------------------------------------------------------------
+   Reset & Base Setup
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-family: var(--font-family);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  color-scheme: dark;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--bg-primary);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+}
+
+/* Ambient Radial Lighting Effects */
+.ambient-glow-top {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(520px, 100vw);
+  height: 420px;
+  background: radial-gradient(
+    circle at center,
+    rgba(99, 102, 241, 0.16) 0%,
+    rgba(34, 211, 238, 0.07) 40%,
+    rgba(7, 9, 18, 0) 70%
+  );
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-glow-bottom {
+  position: fixed;
+  bottom: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(440px, 90vw);
+  height: 320px;
+  background: radial-gradient(
+    circle at center,
+    rgba(79, 70, 229, 0.1) 0%,
+    rgba(6, 182, 212, 0.04) 50%,
+    rgba(7, 9, 18, 0) 75%
+  );
+  filter: blur(45px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --------------------------------------------------------------------------
+   App Container & Mobile Page Width
+   Optimized 18-22px padding, safe areas, no horizontal overflow
+   -------------------------------------------------------------------------- */
+.app-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 460px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: max(14px, env(safe-area-inset-top)) clamp(18px, 5.2vw, 22px) max(24px, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+}
+
+/* --------------------------------------------------------------------------
+   1. Header (Mobile Optimized)
+   -------------------------------------------------------------------------- */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0 16px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text-primary);
+  outline: none;
+}
+
+.brand-logo-mark {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, #6366F1 0%, #4338CA 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+.brand-logo-text {
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  color: #FFFFFF;
+}
+
+.brand-name {
+  font-size: 1.12rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.header-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.035);
+  padding: 4px 9px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.status-glow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--secondary-accent);
+  box-shadow: 0 0 7px var(--secondary-accent), 0 0 12px rgba(34, 211, 238, 0.5);
+  animation: pulseDot 2.5s infinite ease-in-out;
+  flex-shrink: 0;
+}
+
+.status-text {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  color: rgba(255, 255, 255, 0.75);
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   2. Community Badge (Compact & Centered)
+   -------------------------------------------------------------------------- */
+.badge-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 4px;
+  margin-bottom: 16px;
+  animation: fadeInDown 0.45s ease-out;
+}
+
+.community-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 13px;
+  background: var(--bg-badge);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 0 14px -3px rgba(99, 102, 241, 0.28);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.badge-dot {
+  width: 5.5px;
+  height: 5.5px;
+  border-radius: 50%;
+  background: #818CF8;
+  box-shadow: 0 0 6px #818CF8;
+  flex-shrink: 0;
+}
+
+.badge-text {
+  font-size: 0.69rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-badge);
+}
+
+/* --------------------------------------------------------------------------
+   3. Hero Section (Dominant yet Natural on Small Screens)
+   -------------------------------------------------------------------------- */
+.hero-section {
+  text-align: center;
+  margin-bottom: 18px;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.hero-headline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.headline-line-1 {
+  font-size: clamp(2.1rem, 8.8vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.09;
+  color: var(--text-primary);
+}
+
+.headline-line-2 {
+  font-size: clamp(2.1rem, 8.8vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.09;
+  background: linear-gradient(135deg, #818CF8 0%, #38BDF8 52%, #22D3EE 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-description {
+  margin-top: 10px;
+  font-size: clamp(0.9rem, 3.8vw, 0.98rem);
+  line-height: 1.48;
+  color: var(--text-secondary);
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 400;
+}
+
+/* --------------------------------------------------------------------------
+   4. Telegram CTA Button (Optimized for Touch Devices)
+   -------------------------------------------------------------------------- */
+.cta-section {
+  width: 100%;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeInUp 0.55s ease-out;
+}
+
+.telegram-cta-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 52px;
+  padding: 13px 20px;
+  background: linear-gradient(135deg, #6366F1 0%, #4F46E5 45%, #0EA5E9 100%);
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: clamp(0.98rem, 4.2vw, 1.05rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 4px 18px -2px rgba(99, 102, 241, 0.42),
+    0 1px 3px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+  outline: none;
+  position: relative;
+  overflow: visible;
+}
+
+/* Crisp stationary content */
+.btn-inner-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  pointer-events: none;
+}
+
+/* Traveling Border Beam (Bright luminous highlight moving along outer border) */
+.btn-border-beam {
+  position: absolute;
+  inset: -1.5px;
+  border-radius: calc(var(--radius-lg) + 1.5px);
+  padding: 2px;
+  pointer-events: none;
+  z-index: 2;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  overflow: hidden;
+  filter:
+    drop-shadow(0 0 1px #ffffff)
+    drop-shadow(0 0 4px #38bdf8)
+    drop-shadow(0 0 8px rgba(34, 211, 238, 0.6));
+}
+
+.btn-border-beam::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 320%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%) rotate(0deg);
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 292deg,
+    rgba(99, 102, 241, 0.12) 312deg,
+    rgba(34, 211, 238, 0.45) 332deg,
+    rgba(56, 189, 248, 0.85) 346deg,
+    rgba(255, 255, 255, 1) 356deg,
+    rgba(224, 242, 254, 0.85) 358deg,
+    transparent 360deg
+  );
+  animation: borderBeamRotate 4s linear infinite;
+}
+
+/* Soft luminous halo extending slightly inside and slightly outside the border */
+.btn-border-glow {
+  position: absolute;
+  inset: -5px;
+  border-radius: calc(var(--radius-lg) + 5px);
+  padding: 6px;
+  pointer-events: none;
+  z-index: 1;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  overflow: hidden;
+  filter: blur(4px);
+  opacity: 0.85;
+}
+
+.btn-border-glow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 320%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%) rotate(0deg);
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 285deg,
+    rgba(99, 102, 241, 0.25) 312deg,
+    rgba(34, 211, 238, 0.7) 338deg,
+    rgba(255, 255, 255, 0.95) 356deg,
+    rgba(56, 189, 248, 0.6) 359deg,
+    transparent 360deg
+  );
+  animation: borderBeamRotate 4s linear infinite;
+}
+
+@keyframes borderBeamRotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Tactile mobile tap response */
+.telegram-cta-button:active {
+  transform: scale(0.975);
+  filter: brightness(0.96);
+  box-shadow:
+    0 2px 8px rgba(99, 102, 241, 0.38),
+    inset 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+@media (hover: hover) {
+  .telegram-cta-button:hover {
+    transform: translateY(-1.5px);
+    box-shadow:
+      0 8px 24px -2px rgba(99, 102, 241, 0.55),
+      0 0 14px rgba(34, 211, 238, 0.3),
+      inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    filter: brightness(1.04);
+  }
+}
+
+.telegram-cta-button:focus-visible {
+  box-shadow:
+    0 0 0 3px var(--bg-primary),
+    0 0 0 5px var(--border-focus);
+}
+
+.telegram-icon {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+.cta-subtext {
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: rgba(156, 163, 175, 0.7);
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   5. Feature Cards (Compact Stacked Mobile Cards)
+   -------------------------------------------------------------------------- */
+.feature-cards-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+  animation: fadeInUp 0.65s ease-out;
+}
+
+.feature-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 13px 15px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform var(--transition-normal), border-color var(--transition-normal), background var(--transition-normal);
+}
+
+@media (hover: hover) {
+  .feature-card:hover {
+    border-color: var(--border-accent);
+    background: var(--bg-card-hover);
+    transform: translateY(-1px);
+  }
+}
+
+.feature-icon-container {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-cyan);
+  flex-shrink: 0;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08);
+}
+
+.feature-icon-container svg {
+  width: 19px;
+  height: 19px;
+}
+
+.feature-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+
+.feature-title {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.feature-desc {
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* --------------------------------------------------------------------------
+   6. Community Info Card (Compact Mobile Fit)
+   -------------------------------------------------------------------------- */
+.community-card-wrapper {
+  width: 100%;
+  margin-bottom: 20px;
+  animation: fadeInUp 0.75s ease-out;
+}
+
+.community-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 16px 18px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.28);
+}
+
+.community-card::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -20%;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.16) 0%, rgba(34, 211, 238, 0.04) 50%, transparent 70%);
+  pointer-events: none;
+  filter: blur(18px);
+}
+
+.community-card-title {
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 5px;
+  letter-spacing: -0.015em;
+  position: relative;
+  z-index: 1;
+}
+
+.community-card-desc {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  position: relative;
+  z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
+   7. Footer
+   -------------------------------------------------------------------------- */
+.site-footer {
+  text-align: center;
+  padding: 8px 10px max(24px, env(safe-area-inset-bottom));
+  margin-top: auto;
+  animation: fadeIn 0.85s ease-out;
+}
+
+.footer-disclaimer {
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: rgba(156, 163, 175, 0.58);
+  max-width: 310px;
+  margin: 0 auto;
+  letter-spacing: -0.005em;
+}
+
+/* --------------------------------------------------------------------------
+   Keyframe Animations
+   -------------------------------------------------------------------------- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Accessibility & Responsive Media Queries
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .status-glow-dot {
+    animation: none;
+  }
+  .btn-border-beam,
+  .btn-border-glow {
+    display: none !important;
+  }
+}
+
+/* Micro-screen support (320px - 340px) */
+@media (max-width: 340px) {
+  .app-container {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .headline-line-1,
+  .headline-line-2 {
+    font-size: 1.95rem;
+  }
+  .hero-description {
+    font-size: 0.86rem;
+  }
+  .feature-card {
+    padding: 11px 12px;
+    gap: 10px;
+  }
+  .feature-icon-container {
+    width: 35px;
+    height: 35px;
+  }
+  .feature-title {
+    font-size: 0.92rem;
+  }
+  .feature-desc {
+    font-size: 0.79rem;
+  }
+}
+
+/* Desktop refinement (768px+) */
+@media (min-width: 768px) {
+  body {
+    background: radial-gradient(circle at 50% 20%, #0d1124 0%, #070912 60%);
+  }
+  .app-container {
+    padding-top: 24px;
+    padding-bottom: 40px;
+  }
+}
